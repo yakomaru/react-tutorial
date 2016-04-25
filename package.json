@@ -5,12 +5,49 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.4.3",
-    "express": "^4.4.5"
+    "browserify": "^13.0.0",
+    "express": "^4.4.5",
+    "minifyify": "^7.3.3",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "reactify": "^1.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^2.8.0",
+    "eslint-config-google": "^0.5.0",
+    "eslint-plugin-html": "^1.4.0",
+    "eslint-plugin-react": "^5.0.1",
+    "watchify": "^3.7.0"
+  },
+  "eslintConfig": {
+    "extends": "google",
+    "plugins": [
+      "react",
+      "html"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 5,
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "no-unused-vars": [
+        "error",
+        {
+          "varsIgnorePattern": "^[A-Z].*"
+        }
+      ]
+    },
+    "globals": {
+      "document": true
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "NODE_ENV=production browserify -t reactify -d -p [minifyify --no-map] public/scripts/index.jsx -o public/dist/bundle.js",
+    "watch": "watchify -t reactify public/scripts/index.jsx -o public/dist/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -27,7 +64,7 @@
     "url": "https://github.com/reactjs/react-tutorial/issues"
   },
   "homepage": "https://github.com/reactjs/react-tutorial",
-  "engines" : {
-    "node" : "0.12.x"
+  "engines": {
+    "node": "0.12.x"
   }
 }
