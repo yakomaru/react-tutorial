@@ -5,18 +5,24 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.4.3",
-    "browserify": "^13.0.0",
     "express": "^4.4.5",
-    "minifyify": "^7.3.3",
     "react": "^15.0.1",
-    "react-dom": "^15.0.1",
-    "reactify": "^1.1.1"
+    "react-dom": "^15.0.1"
   },
   "devDependencies": {
+    "browserify": "^13.0.0",
+    "envify": "^3.4.0",
     "eslint": "^2.8.0",
     "eslint-config-google": "^0.5.0",
     "eslint-plugin-html": "^1.4.0",
     "eslint-plugin-react": "^5.0.1",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-util": "^3.0.7",
+    "nodemon": "^1.9.2",
+    "reactify": "^1.1.1",
+    "uglifyify": "^3.0.1",
+    "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   },
   "eslintConfig": {
@@ -46,8 +52,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "build": "NODE_ENV=production browserify -t reactify -d -p [minifyify --no-map] public/scripts/index.jsx -o public/dist/bundle.js",
-    "watch": "watchify -t reactify public/scripts/index.jsx -o public/dist/bundle.js"
+    "prestart": "gulp --production",
+    "dev": "gulp & nodemon server.js"
   },
   "repository": {
     "type": "git",
